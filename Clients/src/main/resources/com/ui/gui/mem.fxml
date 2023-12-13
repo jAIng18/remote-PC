@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="566.0" style="-fx-background-color: #524A7B;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="32.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="32.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/danh-modified.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="32.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/Dang-modified.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="32.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/giang-modified.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="182.0" layoutY="52.0" prefHeight="45.0" prefWidth="315.0" text="Liêu Hải Lưu Danh" textFill="#d7cfcf">
+         <font>
+            <Font name="Calibri Light" size="39.0" />
+         </font>
+      </Label>
+      <Label layoutX="182.0" layoutY="203.0" prefHeight="45.0" prefWidth="298.0" text="Trần Trường Giang" textFill="#d7cfcf">
+         <font>
+            <Font name="Calibri Light" size="39.0" />
+         </font>
+      </Label>
+      <Label layoutX="182.0" layoutY="332.0" prefHeight="45.0" prefWidth="275.0" text="Quách Hải Đăng" textFill="#d7cfcf">
+         <font>
+            <Font name="Calibri Light" size="39.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

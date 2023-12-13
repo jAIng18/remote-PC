@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ui.gui.Controller">
+   <children>
+      <VBox prefHeight="510.0" prefWidth="202.0" style="-fx-background-color: #EBE8F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="204.0" fitWidth="252.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@image/logo.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnPolicy" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="44.0" prefWidth="202.0" stylesheets="@style.css" text="Policy">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/policy.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnMem" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="44.0" prefWidth="202.0" stylesheets="@style.css" text="Members">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/members.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnStart" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="44.0" prefWidth="202.0" stylesheets="@style.css" text="Start">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/start.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnExit" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="44.0" prefWidth="202.0" stylesheets="@style.css" text="Exit">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/exit.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </Button>
+         </children>
+      </VBox>
+      <Label layoutX="226.0" layoutY="23.0" prefHeight="34.0" prefWidth="367.0" text="Remote PC using Mail only">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <BorderPane fx:id="mainPane" layoutX="204.0" layoutY="57.0" prefHeight="450.0" prefWidth="566.0">
+         <center>
+            <TextArea prefHeight="450.0" prefWidth="566.0" text="Hi guys, we are 22TNT1-HCMUS. This is our mini project for Computer Network.&#10;Hope you guys enjoy it!!&#10;&#10;1. Purpose&#10;This policy outlines the acceptable use of the Remote PC provided by 22TNT1 for accessing and managing remote computers. &#10;The purpose of this policy is to ensure the secure, efficient, and responsible use of the App while protecting the confidentiality, integrity, and &#10;availability of company information.&#10;&#10;2. Scope&#10;This policy applies to all employees, contractors, and third-party users who have been granted access to the Remote PC.&#10;&#10;3. Access Control&#10;Users must authenticate themselves using company-provided credentials to access the Remote PC.&#10;Access permissions will be granted based on job responsibilities and the principle of least privilege.&#10;Users should log out of the App when the session is no longer needed to prevent unauthorized access.&#10;&#10;4. Security Measures&#10;All communication between the App and remote computers must be encrypted.&#10;Users are prohibited from sharing login credentials or allowing unauthorized individuals to use the App on their behalf.&#10;The App should only be used on secure, password-protected devices.&#10;Users must keep their devices and the App updated with the latest security patches.&#10;&#10;5. Data Protection&#10;Users must comply with all applicable data protection laws and regulations when accessing and handling sensitive data through the App.&#10;Data transferred between the remote computer and the user's device should be limited to business-related activities.&#10;&#10;6. Monitoring and Auditing&#10;The use of the Remote PC may be monitored for security and auditing purposes.&#10;Any suspicious or unauthorized activity must be reported immediately to the IT department.&#10;&#10;7. Prohibited Activities&#10;Users are prohibited from using the App for any illegal activities.&#10;Unauthorized attempts to access or manipulate data on remote computers are strictly prohibited.&#10;Users should not install or run any unauthorized software on remote computers.&#10;&#10;8. Compliance&#10;Users must comply with all applicable laws, regulations, and company policies while using the Remote PC Access App.&#10;Non-compliance may result in disciplinary action, including but not limited to, revocation of access, suspension, or termination of employment.&#10;&#10;9. Training and Awareness&#10;Users will receive training on the proper use of the Remote PC.&#10;Regular awareness programs will be conducted to educate users about security best practices.&#10;&#10;10. Review and Revision&#10;This policy will be reviewed periodically and updated as necessary to ensure its continued relevance and effectiveness.&#10;" BorderPane.alignment="CENTER" />
+         </center></BorderPane>
+   </children>
+</AnchorPane>
