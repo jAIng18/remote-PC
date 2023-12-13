@@ -78,37 +78,39 @@ public class ProcessPC {
         }
     }
 
-    public void StopProcess(int processid) {
+    public String StopProcess(int processid) {
         try {
             if (this.os.contains("win")) {
                 this.runtime.exec("taskkill /F /PID " + processid);
-                System.out.println("Kill " + processid + " successfully");
+                return "Kill " + processid + " successfully";
             } else if (this.os.contains("mac") || this.os.contains("nix") || this.os.contains("nux")) {
                 this.runtime.exec("kill " + processid);
-                System.out.println("Kill " + processid + " successfully");
+                return "Kill " + processid + " successfully";
             } else {
                 System.out.println("Unsupported operating system");
             }
         } catch (Exception e) {
-            System.out.println(e.toString());
+            return e.toString();
         }
+        return "Cann't kill";
     }
 
-    public void StartProcess(String path) {
+    public String StartProcess(String path) {
         try {
             if (this.os.contains("win") || this.os.contains("nux") || this.os.contains("nix")) {
                 this.runtime.exec(path);
-                System.out.println("success");
+                return "Kill " + path + " successfully";
             } else if (this.os.contains("mac")) {
                 this.runtime.exec("open -n " + path);
-                System.out.println("success");
+                return "Kill " + path + " successfully";
             } else {
-                System.out.println("Unsuported Operating System");
+                return "Unsuported Operating System";
             }
 
         } catch (Exception e) {
             System.out.println(e.toString());
         }
+        return "Cann't kill";
     }
 
     public static void main(String[] arg) {
@@ -117,12 +119,5 @@ public class ProcessPC {
         processPC.StartProcess(" /System/Applications/Calculator.app");
         String s = processPC.ProcessList();
         System.out.println(s);
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Pls give us what u wanna start");
-        String start = scanner.nextLine();
-        processPC.StartProcess(start);
-        System.out.println("Pls give us what u want to kill");
-        int kill = scanner.nextInt();
-        processPC.StopProcess(kill);
     }
 }

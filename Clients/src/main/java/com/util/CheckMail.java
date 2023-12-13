@@ -82,12 +82,9 @@ public class CheckMail {
         Thread thread = new Thread() {
             @Override
             public void run() {
-                boolean runLoop = true;
+
                 long startTime = System.currentTimeMillis();
-                if (command != null && (command.contains("shutdown") || command.contains("restart"))) {
-                    runLoop = false;
-                }
-                while (runLoop || (System.currentTimeMillis() - startTime < 10000)) {
+                while ((System.currentTimeMillis() - startTime < 30000)) {
                     try {
                         Thread.sleep(500);
                         Folder emailFolder = store.getFolder("INBOX");

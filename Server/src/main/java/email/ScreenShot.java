@@ -18,7 +18,7 @@ public class ScreenShot {
             robot = new Robot();
             rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
         } catch (AWTException e) {
-            System.out.println("Cannot create robot");
+            System.out.println("Error! Cannot create robot");
         }
     }
 
@@ -36,7 +36,7 @@ public class ScreenShot {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return "Error";
     }
 
     public static void main(String[] args) {
