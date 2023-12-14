@@ -358,7 +358,11 @@ public class Start {
                     display("Mail had been sent!! Pleas wait 30 seconds, if there is response, it means some errors have occurred", "green");
                     Thread.sleep(10000);
                     String a = CheckMail.getInstance().listen("shutdown");
-                    display(a,"red");
+                    if(a.contains("res")) {
+                        String[] parts = a.split("/");
+                        display(parts[1], "green");
+                    }else
+                        display(a,"red");
                 } catch (Exception e) {
                     e.printStackTrace();
                     display(e.getMessage(), "red");
@@ -378,7 +382,11 @@ public class Start {
                     display("Mail had been sent!! Pleas wait 30 seconds, if there is response, it means some errors have occurred", "green");
                     Thread.sleep(10000);
                     String a = CheckMail.getInstance().listen("restart");
-                    display(a,"red");
+                    if(a.contains("res")) {
+                        String[] parts = a.split("/");
+                        display(parts[1], "green");
+                    }else
+                        display(a,"red");
                 } catch (Exception e) {
                     e.printStackTrace();
                     display(e.getMessage(), "red");

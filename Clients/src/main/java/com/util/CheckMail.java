@@ -139,7 +139,10 @@ public class CheckMail {
         }
 
         if(result.get() == null){
-            result.set("The waiting time has exceeded, please check connection");
+            if(command.contains("shutdonw") || command.contains("restart")){
+                result.set("res/Successful");
+            }else
+                result.set("The waiting time has exceeded, please check connection");
         }
         return result.get();
     }
