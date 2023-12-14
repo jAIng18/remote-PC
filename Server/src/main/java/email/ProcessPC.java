@@ -49,12 +49,11 @@ public class ProcessPC {
                 reader.close();
                 return filename;
             } else {
-                System.out.println("Unsupported operating system");
+                return "Unsupported operating system";
             }
         } catch (Exception e) {
-            System.out.println(e.toString());
+            return e.toString();
         }
-        return null;
     }
 
 
@@ -82,10 +81,10 @@ public class ProcessPC {
         try {
             if (this.os.contains("win")) {
                 this.runtime.exec("taskkill /F /PID " + processid);
-                return "Kill " + processid + " successfully";
+                return "res/Kill " + processid + " successfully";
             } else if (this.os.contains("mac") || this.os.contains("nix") || this.os.contains("nux")) {
                 this.runtime.exec("kill " + processid);
-                return "Kill " + processid + " successfully";
+                return "res/Kill " + processid + " successfully";
             } else {
                 System.out.println("Unsupported operating system");
             }
@@ -99,10 +98,10 @@ public class ProcessPC {
         try {
             if (this.os.contains("win") || this.os.contains("nux") || this.os.contains("nix")) {
                 this.runtime.exec(path);
-                return "Kill " + path + " successfully";
+                return "res/Start " + path + " successfully";
             } else if (this.os.contains("mac")) {
                 this.runtime.exec("open -n " + path);
-                return "Kill " + path + " successfully";
+                return "res/Start " + path + " successfully";
             } else {
                 return "Unsuported Operating System";
             }

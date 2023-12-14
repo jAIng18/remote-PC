@@ -95,17 +95,26 @@ public class CheckMail {
                             Message newEmail = ls[0];
                             Address[] froms = newEmail.getFrom();
                             String from = (froms == null) ? "" : ((InternetAddress) froms[0]).getAddress();
-                            String subject = newEmail.getSubject();
+                            Object Content = newEmail.getContent();
+                            String m = "Error";
+                            Multipart multipart = (Multipart) Content;
+                            for (int i = 0; i < multipart.getCount(); i++) {
+                                BodyPart bodyPart = multipart.getBodyPart(i);
+                                if (bodyPart.isMimeType("text/plain")) {
+                                    m = bodyPart.getContent().toString();
+                                    break;
+                                }
+                            }
                             boolean exists = Arrays.asList(acpEmail).contains(from);
 
                             if (exists) {
                                 String a = downloadAttachment(newEmail);
-                                if(a == null)
-                                    result.set(subject);
-                                else
-                                    result.set(a); // Set the result
+                                if(a == null){
+                                    result.set(m);
+                                }else
+                                    result.set(a);
                                 emailFolder.close(true);
-                                return; // Stop listening once an email is found
+                                return;
                             }
                             newEmail.setFlag(Flags.Flag.DELETED, true);
                         }
@@ -129,7 +138,10 @@ public class CheckMail {
             e.printStackTrace();
         }
 
-        return result.get(); // Return the stored result
+        if(result.get() == null){
+            result.set("The waiting time has exceeded, please check connection");
+        }
+        return result.get();
     }
 
     public String downloadAttachment(Message message) throws MessagingException, IOException {

@@ -90,10 +90,10 @@ public class ListApp {
         Desktop desktop = Desktop.getDesktop();
         try {
             desktop.open(file);
+            return "Sucessful";
         } catch (IOException e) {
             return "An error occurred while opening the file: " + e.getMessage();
         }
-        return "Error when running app";
     }
 }
 

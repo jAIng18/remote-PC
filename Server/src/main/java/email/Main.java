@@ -42,8 +42,8 @@ public class Main {
             LogoutandShut.getInstance().Logout(sudopass);
             return 1;
         }catch (Exception e){
-            String subject = "res/shutdown" ;
             try {
+                String subject = "res/Shutdown";
                 SendMail.getInstance().Send(subject, "Can't Shutdown due to error: " + e.toString(), null);
             }catch (IOException | MessagingException er){
                 er.printStackTrace();
@@ -65,14 +65,14 @@ public class Main {
     public static int getFile( String path) {
         try {
             Path file = Path.of(path);
-
+            String subject = "res/Get File";
             if (!Files.exists(file)) {
-                SendMail.getInstance().Send("res/File doesn't exist, try listing the directory!", null, "");
+                SendMail.getInstance().Send(subject, "File doesn't exist, try listing the directory!", null);
             } else {
                 if (Files.isRegularFile(file)) {
-                    SendMail.getInstance().Send("res/", null, path);
+                    SendMail.getInstance().Send(subject, null, path);
                 } else {
-                    SendMail.getInstance().Send("res/You requested a directory type", null, "");
+                    SendMail.getInstance().Send(subject, "You requested a directory type", null);
                 }
             }
             return 1;
@@ -83,7 +83,7 @@ public class Main {
         }
     }
     private static int listApp(){
-        String subject = "res / " ;
+        String subject = "res/list App" ;
         String filename = "List App" + ZonedDateTime.now().format(DateTimeFormatter
                 .ofPattern(" dd-MM-yyyy HH-mm")) + ".txt";
         try{
@@ -96,8 +96,9 @@ public class Main {
         }
     }
     private static int runApp(String path){
+        String subject = "res/Run App";
         try{
-            SendMail.getInstance().Send(ListApp.getInstance().runApp(path),"",null);
+            SendMail.getInstance().Send(subject,ListApp.getInstance().runApp(path),null);
             return 1;
         }catch (IOException | MessagingException e){
             e.printStackTrace();
@@ -105,9 +106,9 @@ public class Main {
         }
     }
     private static int stopProcess(int PID){
-        String subject = ProcessPC.getInstance().StopProcess(PID);
+        String subject = "res/Stop Process";
         try{
-            SendMail.getInstance().Send(subject,"",null);
+            SendMail.getInstance().Send(subject,ProcessPC.getInstance().StopProcess(PID),null);
             return 1;
         }catch(IOException | MessagingException e){
             e.printStackTrace();
@@ -115,9 +116,9 @@ public class Main {
         }
     }
     private static int startProcess(String Path){
-        String subject = ProcessPC.getInstance().StartProcess(Path);
+        String subject = "res/Start Process";
         try{
-            SendMail.getInstance().Send(subject,"",null);
+            SendMail.getInstance().Send(subject,ProcessPC.getInstance().StartProcess(Path),null);
             return 1;
         }catch(IOException | MessagingException e){
             e.printStackTrace();
@@ -125,7 +126,7 @@ public class Main {
         }
     }
     private static int listDir(){
-        String subject = "res/ " ;
+        String subject = "res/List Directory" ;
         String filename = "List Directory" + ZonedDateTime.now().format(DateTimeFormatter
                 .ofPattern(" dd-MM-yyyy HH-mm")) + ".txt";
         try{
@@ -137,12 +138,12 @@ public class Main {
             return 0;
         }
     }
-    private static int ReStart(String Password){
+    private static int Restart(String Password){
         try{
             LogoutandShut.getInstance().Logout(Password);
             return 1;
         }catch (Exception e){
-            String subject = "res / " ;
+            String subject = "res/Restart";
             try {
                 SendMail.getInstance().Send(subject, "Can't Shutdown due to error: " + e.toString(), null);
             }catch (IOException | MessagingException er){
@@ -197,8 +198,8 @@ public class Main {
         }
         else if (command.equalsIgnoreCase("restart")) {
             if (parts.length > 1)
-                return ReStart(parts[1].trim());
-            return ReStart("");
+                return Restart(parts[1].trim());
+            return Restart("");
         }
         else if (command.equalsIgnoreCase("runapp")) {
             if(parts.length > 1)
