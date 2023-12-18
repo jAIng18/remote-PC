@@ -25,7 +25,7 @@ public class SendMail {
     private static SendMail instance = new SendMail();
 
     private void getMail() {
-        try (BufferedReader br = new BufferedReader(new FileReader("Clients/mail.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("mail.txt"))) {
             this.email = br.readLine().trim();
             this.password = br.readLine().trim();
         } catch (IOException e) {

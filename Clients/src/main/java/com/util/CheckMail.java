@@ -28,7 +28,7 @@ public class CheckMail {
     }
     public static String[] extractEmails() {
         String text = "";
-        try (BufferedReader br = new BufferedReader(new FileReader("Clients/acceptedMail.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("acceptedMail.txt"))) {
             text = br.readLine().trim();
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,7 +63,7 @@ public class CheckMail {
     }
 
     private void getMail() {
-        try (BufferedReader br = new BufferedReader(new FileReader("Clients/mail.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("mail.txt"))) {
             this.username = br.readLine().trim();
             this.password = br.readLine().trim();
         } catch (IOException e) {
