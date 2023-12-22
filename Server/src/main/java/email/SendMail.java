@@ -59,7 +59,7 @@ public class SendMail {
 
             this.message.setRecipient(
                     Message.RecipientType.TO,
-                    new InternetAddress("haidangdtly2022@gmail.com")
+                    new InternetAddress("clientaik22@gmail.com")
             );
         } catch (MessagingException e) {
             throw new RuntimeException(e);

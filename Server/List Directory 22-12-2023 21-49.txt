@@ -1,0 +1,73 @@
+├───.idea
+│   ├───.gitignore
+│   ├───compiler.xml
+│   ├───encodings.xml
+│   ├───jarRepositories.xml
+│   ├───misc.xml
+│   ├───Server.iml
+│   ├───vcs.xml
+│   └───workspace.xml
+├───acceptedMail.txt
+├───KEY LOG 14-12-2023 00-21.txt
+├───KEY LOG 14-12-2023 01-29.txt
+├───KEY LOG 14-12-2023 01-36.txt
+├───KEY LOG 22-12-2023 21-43.txt
+├───List Directory 22-12-2023 21-49.txt
+├───log.txt
+├───mail.txt
+├───out.txt
+├───pom.xml
+├───snapshot14-12-2023 02-33.png
+├───snapshot22-12-2023 21-31.png
+├───snapshot22-12-2023 21-39.png
+├───snapshot22-12-2023 21-41.png
+├───src
+│   └───main
+│      ├───java
+│      │   ├───email
+│      │   │   ├───CheckMail.java
+│      │   │   ├───KeyLogger.java
+│      │   │   ├───ListApp.java
+│      │   │   ├───ListDir.java
+│      │   │   ├───LogoutandShut.java
+│      │   │   ├───Main.java
+│      │   │   ├───ProcessPC.java
+│      │   │   ├───ScreenShot.java
+│      │   │   └───SendMail.java
+│      │   ├───module-info.java
+│      │   └───ui
+│      │      ├───Controller.java
+│      │      └───Main.java
+│      └───resources
+│         ├───META-INF
+│         │   └───javamail.default.address.map
+│         └───ui
+│            ├───listen.fxml
+│            ├───main.fxml
+│            └───style.css
+└───target
+   ├───classes
+   │   ├───email
+   │   │   ├───CheckMail$1.class
+   │   │   ├───CheckMail.class
+   │   │   ├───KeyLogger$1.class
+   │   │   ├───KeyLogger.class
+   │   │   ├───ListApp.class
+   │   │   ├───ListDir.class
+   │   │   ├───LogoutandShut.class
+   │   │   ├───Main.class
+   │   │   ├───ProcessPC.class
+   │   │   ├───ScreenShot.class
+   │   │   ├───SendMail$1.class
+   │   │   └───SendMail.class
+   │   ├───META-INF
+   │   │   └───javamail.default.address.map
+   │   ├───module-info.class
+   │   └───ui
+   │      ├───Controller.class
+   │      ├───listen.fxml
+   │      ├───Main.class
+   │      ├───main.fxml
+   │      └───style.css
+   └───generated-sources
+      └───annotations
