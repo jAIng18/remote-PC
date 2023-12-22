@@ -6,10 +6,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -42,6 +39,7 @@ public class Start {
         requestbox.setItems(FXCollections.observableList(list));
         requestbox.getSelectionModel().selectFirst();
         optionals.setEditable(false);
+        //requestbox.setOnAction(this::handleOptionSelection);
         requestbox.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, s, t1) -> {
                     switch (t1) {
@@ -112,7 +110,13 @@ public class Start {
                 }
         );
     }
-
+    @FXML
+    private TextArea displayTextArea ; // Assuming you have a TextArea for displaying text
+    private void clearDisplay() {
+        if (displayTextArea != null) {
+            displayTextArea.clear();
+        }
+    }
     public void display (String s, String color){
         Text displayText = new Text(s);
         displayText.setFont(new Font("Time News Roman", 14));
@@ -123,6 +127,11 @@ public class Start {
                 displayScene.getChildren().clear();
             displayScene.getChildren().add(displayText);
         });
+    }
+    @FXML
+    public void handleOptionSelection(ActionEvent event) {
+        clearDisplay(); // Clear display when a different option is selected
+        // Add any other logic related to option selection if needed
     }
 
     @FXML
@@ -135,7 +144,6 @@ public class Start {
                 try {
                     SendMail.getInstance().Send("takeshot");
                     display("Mail had been sent!! Waiting for a response...", "green");
-                    Thread.sleep(15000);
                     String a = CheckMail.getInstance().listen("takeshot");
                     File file = new File(a);
                     if (file.exists()) {
@@ -208,7 +216,6 @@ public class Start {
                 try {
                     SendMail.getInstance().Send("listdir");
                     display("Mail had been sent!! Waiting for a response...", "green");
-                    Thread.sleep(15000);
                     String a = CheckMail.getInstance().listen("listdir");
                     File file = new File(a);
                     if (file.exists()) {
@@ -234,7 +241,6 @@ public class Start {
                 try {
                     SendMail.getInstance().Send("listprocess");
                     display("Mail had been sent!! Waiting for a response...", "green");
-                    Thread.sleep(15000);
                     String a = CheckMail.getInstance().listen("listprocess");
                     File file = new File(a);
                     if (file.exists()) {
@@ -269,7 +275,7 @@ public class Start {
                             System.out.println(pid);
                             SendMail.getInstance().Send("stopprocess/" + pid);
                             display("Mail had been sent!! Waiting for a response...", "green");
-                            Thread.sleep(15000);
+
                             String a = CheckMail.getInstance().listen("stopprocess");
                             if (a != null) {
                                 if(a.contains("res")){
@@ -301,7 +307,7 @@ public class Start {
                     String pid = optionals.getText();
                     SendMail.getInstance().Send("startprocess/" + pid);
                     display("Mail had been sent!! Waiting for a response...", "green");
-                    Thread.sleep(15000);
+
                     String a = CheckMail.getInstance().listen("startprocess");
                     if (a != null) {
                         if(a.contains("res")){
@@ -329,7 +335,7 @@ public class Start {
                 try {
                     SendMail.getInstance().Send("listapp");
                     display("Mail had been sent!! Waiting for a response...", "green");
-                    Thread.sleep(15000);
+
                     String a = CheckMail.getInstance().listen("listapp");
                     File file = new File(a);
                     if (file.exists()) {
@@ -356,7 +362,7 @@ public class Start {
                     String sudo = optionals.getText();
                     SendMail.getInstance().Send("shutdown/" + sudo);
                     display("Mail had been sent!! Pleas wait 30 seconds, if there is response, it means some errors have occurred", "green");
-                    Thread.sleep(10000);
+
                     String a = CheckMail.getInstance().listen("shutdown");
                     if(a.contains("res")) {
                         String[] parts = a.split("/");
@@ -380,7 +386,7 @@ public class Start {
                 try {
                     SendMail.getInstance().Send("restart");
                     display("Mail had been sent!! Pleas wait 30 seconds, if there is response, it means some errors have occurred", "green");
-                    Thread.sleep(10000);
+
                     String a = CheckMail.getInstance().listen("restart");
                     if(a.contains("res")) {
                         String[] parts = a.split("/");
@@ -406,7 +412,7 @@ public class Start {
                     System.out.println(file);
                     SendMail.getInstance().Send("runapp/" + file);
                     display("Mail had been sent!! Waiting for a response...", "green");
-                    Thread.sleep(15000);
+
                     String a = CheckMail.getInstance().listen("runapp");
                     if(a.contains("res")) {
                         String[] parts = a.split("/");
@@ -448,14 +454,14 @@ public class Start {
                     System.out.println(file);
                     SendMail.getInstance().Send("getfile/" + file);
                     display("Mail had been sent!! Waiting for a response...", "green");
-                    Thread.sleep(15000);
+
                     String a = CheckMail.getInstance().listen("runapp");
                     if (a != null) {
                         if(a.contains("res")){
                             String[] parts = a.split("/");
                             display(parts[1],"green");
                         }else{
-                            display(a,"red");
+                            display(a,"green");
                         }
                     } else {
                         display("Error happened", "red");
